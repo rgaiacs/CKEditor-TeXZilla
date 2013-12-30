@@ -1,0 +1,6 @@
+[submodule "texzilla"]
+	path = texzilla
+	url = https://github.com/fred-wang/TeXZilla
+[submodule "ckeditor"]
+	path = ckeditor
+	url = https://github.com/ckeditor/ckeditor-dev

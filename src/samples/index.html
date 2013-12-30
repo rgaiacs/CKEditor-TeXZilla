@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TeXZilla &mdash; CKEditor Sample</title>
+<meta charset="utf-8">
+<script src="../../../ckeditor.js"></script>
+<link href="../../../samples/sample.css" rel="stylesheet">
+<meta name="ckeditor-sample-name" content="TeXZilla plugin">
+<meta name="ckeditor-sample-group" content="Plugins">
+<meta name="ckeditor-sample-description" content="Create mathematical equations in TeX and display using MathML.">
+<meta name="ckeditor-sample-isnew" content="1">
+<script>
+CKEDITOR.disableAutoInline = true;
+</script>
+</head>
+<body>
+<h1 class="samples">
+  <a href="../../../samples/index.html">CKEditor Samples</a> &raquo; Mathematical Formulas
+</h1>
+
+<div class="description">
+  <p>
+  This sample shows the usage of the CKEditor mathematical plugin that use MathML. You can now use it to create or modify equations using TeX.
+  </p>
+  <textarea id="editor1" cols="10" rows="10">
+  </textarea>
+  <script>
+
+CKEDITOR.replace( 'editor1', {
+extraPlugins: 'texzilla',
+height: 350
+} );
+
+if ( CKEDITOR.env.ie && CKEDITOR.env.version == 8 )
+  document.getElementById( 'ie8-warning' ).className = 'warning';
+
+  </script>
+
+  <div id="footer">
+    <hr>
+    <p>
+    CKEditor - The text editor for the Internet - <a class="samples" href="http://ckeditor.com/">http://ckeditor.com</a>
+    </p>
+    <p id="copy">
+    Copyright &copy; 2003-2013, <a class="samples" href="http://cksource.com/">CKSource</a> - Frederico
+    Knabben. All rights reserved.
+    </p>
+  </div>
+  </body>
+  </html>
