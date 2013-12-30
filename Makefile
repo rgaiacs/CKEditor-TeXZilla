@@ -29,6 +29,12 @@ help:
 	@echo ''
 	@echo 'make deploy CKEDITORPATH=/path/to/ckeditor'
 	@echo '  Copy the plugin into `/path/to/ckeditor/plugins/texzilla`'
+	@echo ''
+	@echo 'make link'
+	@echo '  Link `src` to `ckeditor/plugins/texzilla`'
+	@echo ''
+	@echo 'make link CKEDITORPATH=/path/to/ckeditor'
+	@echo '  Link `src` to `/path/to/ckeditor/plugins/texzilla`'
 
 src/icons/texzilla.png: src/icons/texzilla.svg
 	convert -background none -density 512x512 $< -resize 16x16 $@
@@ -38,3 +44,10 @@ build: src/icons/texzilla.png
 deploy: build
 	mkdir -p $(CKEDITORPATH)$(PLUGINPATH)
 	cp -r src/* $(CKEDITORPATH)$(PLUGINPATH)
+
+link: build
+	ln -s $(PWD)/src $(CKEDITORPATH)$(PLUGINPATH)
+
+clean:
+	rm -f src/icons/texzilla.png
+	rm -rf $(CKEDITORPATH)$(PLUGINPATH)
