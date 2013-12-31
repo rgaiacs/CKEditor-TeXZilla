@@ -43,11 +43,17 @@ build: src/icons/texzilla.png
 
 deploy: build
 	mkdir -p $(CKEDITORPATH)$(PLUGINPATH)
-	cp -r src/* $(CKEDITORPATH)$(PLUGINPATH)
+	if test -d $(CKEDITORPATH)$(PLUGINPATH); then \
+	    cp -r src/* $(CKEDITORPATH)$(PLUGINPATH); \
+	fi
 
 link: build
-	ln -s $(PWD)/src $(CKEDITORPATH)$(PLUGINPATH)
+	if test ! -e $(CKEDITORPATH)$(PLUGINPATH); then \
+	    ln -s $(PWD)/src $(CKEDITORPATH)$(PLUGINPATH); \
+	fi
 
 clean:
-	rm -f src/icons/texzilla.png
 	rm -rf $(CKEDITORPATH)$(PLUGINPATH)
+
+cleanall: clean
+	rm -f src/icons/texzilla.png
