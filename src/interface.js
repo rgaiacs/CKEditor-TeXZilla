@@ -25,7 +25,7 @@ CKEDITOR.plugins.add( 'texzilla', {
             button: 'Insert MathML',
 
             // The MathML element will be place inside the span
-            template: "<span class='texzilla'><span>",
+            template: "<p class='texzilla'><p>",
 
             parts: {
                 span: 'span'
