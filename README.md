@@ -5,10 +5,10 @@ This is a plugin for [CKEditor](http://ckeditor.com) that use
 [TeXZilla](https://github.com/fred-wang/TeXZilla) to insert MathML from TeX
 input.
 
-Dependences
------------
+Dependencies
+------------
 
-All dependences of TeXZilla must be satisfied.
+All dependencies of TeXZilla must be satisfied.
 
 Building
 --------

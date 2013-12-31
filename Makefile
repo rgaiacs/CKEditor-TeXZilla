@@ -16,6 +16,8 @@
 
 CKEDITORPATH?=ckeditor
 PLUGINPATH=/plugins/texzilla
+PARTS=src/interface.js \
+      src/parse.js
 
 help:
 	@echo 'make help'
@@ -36,10 +38,20 @@ help:
 	@echo 'make link CKEDITORPATH=/path/to/ckeditor'
 	@echo '  Link `src` to `/path/to/ckeditor/plugins/texzilla`'
 
+# Build the icon from svg
 src/icons/texzilla.png: src/icons/texzilla.svg
 	convert -background none -density 512x512 $< -resize 16x16 $@
 
-build: src/icons/texzilla.png
+# Build the parser from TeXZilla
+src/parse.js:
+	$(MAKE) -C texzilla build
+	cp texzilla/TeXZilla.js src/parse.js
+
+# Join the TeXZilla with the CKEditor plugin interface
+src/plugin.js: $(PARTS)
+	cat $^ > $@
+
+build: src/icons/texzilla.png src/plugin.js
 
 deploy: build
 	mkdir -p $(CKEDITORPATH)$(PLUGINPATH)
