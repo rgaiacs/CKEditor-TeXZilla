@@ -15,7 +15,7 @@ Building
 
 First you have to download CKEditor and TeXZilla:
 
-  $ git submodule init
+  $ git submodule update --init
 
 After that just
 
