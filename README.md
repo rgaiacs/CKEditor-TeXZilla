@@ -34,7 +34,13 @@ MathML (e.g. Firefox).
 Bugs
 ----
 
-1. Can't place text around the MathML element.
+1. Use the source view break the widgets.
+
+When change to the source code editor the widget is lost and because of this
+when back to the WYSIWYG it just show the LaTeX version with some garbage of the
+MathML.
+
+2. Can't place text around the MathML element.
 
 CKEditor insert a `div` tag for the widget and some information in the first tag
 of the template:
@@ -52,7 +58,3 @@ data-cke-filter="off" data-cke-display-name="p" data-cke-widget-id="0">
   url('file:///home/raniere/src/ck-texzilla/ckedit…or/plugins/widget/images/handle.png"></span>
 </div>
 ```
-
-When change to the source code editor the widget is lost and because of this
-when back to the WYSIWYG it just show the LaTeX version with some garbage of the
-MathML.
