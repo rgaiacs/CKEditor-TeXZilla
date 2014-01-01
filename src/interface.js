@@ -22,6 +22,8 @@ CKEDITOR.plugins.add( 'texzilla', {
 
         editor.addCommand('texzillaDialog', new CKEDITOR.dialogCommand('texzillaDialog', {
           // Advanced Content Filter
+          // More information about the string format in
+          // http://docs.ckeditor.com/#!/guide/dev_allowed_content_rules-section-2
           // TODO Add more tags
           allowedContent: 'math[xmlns] semantics mn mo msqrt annotation[encoding]',
           requiredContent: 'math mn mo msqrt'

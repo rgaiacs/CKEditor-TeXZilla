@@ -27,7 +27,11 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                     {
                         id: 'tex',
                         type: 'textarea',
-                        label: 'TeX code'
+                        label: 'TeX code',
+                        setup: function(element) {
+                            // TODO Look for <annotation encoding="TeX">
+                            // TODO Look for <math alttext=""> as fallback
+                        }
                     }
                 ]
             },
@@ -38,11 +42,39 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                     {
                         id: 'display',
                         type: 'checkbox',
-                        label: 'Display'
+                        label: 'Display',
+                        setup: function(element) {
+                            var display = element.getAttribute("display");
+                            if (display === 'block') {
+                                this.setValue(true);
+                            }
+                            else {
+                                this.setValue(false);
+                            }
+                        }
                     }
                 ]
             }
         ],
+        onShow: function() {
+            var selection = editor.getSelection();
+            var element = selection.getStartElement();
+            // Try to locate a `math` or `body` tag.
+            while (element.getName() != 'math' &&
+                    element.getName() != 'body') {
+                element = element.getParent();
+            }
+            if (!element || element.getName() != 'math') {
+                this.insertMode = true;
+            }
+            else {
+                this.mathRoot = element;
+            }
+            if (!this.insertMode) {
+                // invoke the setup functions for the element
+                this.setupContent( element );
+            }
+        },
         onOk: function() {
           var dialog = this;
 
