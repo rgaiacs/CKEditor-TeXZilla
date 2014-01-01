@@ -14,28 +14,41 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-CKEDITOR.dialog.add('texzilla', function( editor ) {
+CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
     return {
         title: 'TeXZilla Edit Box',
-        minWidth: 200,
-        minHeight: 100,
+        minWidth: 300,
+        minHeight: 200,
         contents: [
             {
-                id: 'info',
+                id: 'basic',
+                label: 'Basic Settings',
                 elements: [
                     {
                         id: 'tex',
                         type: 'textarea',
-                        label: 'TeX code',
-                        setup: function(widget) {
-                            this.setValue(widget.data.tex);
-                        },
-                        commit: function(widget) {
-                            widget.setData('tex', this.getValue());
-                        }
+                        label: 'TeX code'
+                    }
+                ]
+            },
+            {
+                id: 'advanced',
+                label: 'Advanced Settings',
+                elements: [
+                    {
+                        id: 'display',
+                        type: 'checkbox',
+                        label: 'Display'
                     }
                 ]
             }
-        ]
+        ],
+        onOk: function() {
+          var dialog = this;
+
+          math = TeXZilla.toMathML(dialog.getValueOf('basic', 'tex'));
+          editor.insertHtml(math.outerHTML, 'unfiltered_html'); // Strip
+          // editor.insertElement(math);  // TypeError: element.getName is not a function
+        }
     };
 } );

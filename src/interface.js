@@ -15,43 +15,21 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 CKEDITOR.plugins.add( 'texzilla', {
-    requires: 'widget',
     icons: 'texzilla',
 
     init: function( editor ) {
-        CKEDITOR.dialog.add('texzilla', this.path + 'dialogs/texzilla.js');
+        CKEDITOR.dialog.add('texzillaDialog', this.path + 'dialogs/texzilla.js');
 
-        editor.widgets.add('texzilla', {
-            button: 'Insert MathML',
-
-            // The MathML element will be place inside the span
-            template: "<p class='texzilla'><p>",
-
-            parts: {
-                span: 'span'
-            },
-
-            defaults: {
-                // This is the default example.
-                // TODO: Replace the example with something better.
-                tex: '\\sqrt{2}'
-            },
-
-            dialog: 'texzilla',
-
-            // read the data of the widget from DOM and set this data.
-            init: function() {
-                // Look like that CKEditor store the text in the widget by
-                // default.
-            },
-
-            // is executed every time the widget data is changed
-            data: function() {
-                // Parse the TeX to MathML
-                math = TeXZilla.toMathML(this.data.tex, false);
-                // Add MathML in the widget
-                this.element.setHtml(math.outerHTML);
-            }
+        editor.addCommand('texzillaDialog', new CKEDITOR.dialogCommand('texzillaDialog', {
+          // Advanced Content Filter
+          // TODO Add more tags
+          allowedContent: 'math[xmlns] semantics mn mo msqrt annotation[encoding]',
+          requiredContent: 'math mn mo msqrt'
+        }));
+        editor.ui.addButton('Insert MathML', {
+            label: 'Insert MathML based on (La)TeX',
+            command: 'texzillaDialog',
+            toolbar: 'insert'
         });
     }
 });
