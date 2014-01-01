@@ -28,8 +28,8 @@ First
 
   $ make deploy
 
-Than open `ckeditor/plugins/texzilla/samples/index.html` with a web browser that support
-MathML (e.g. Firefox).
+Than open `ckeditor/plugins/texzilla/samples/index.html` with a web browser that
+support MathML (e.g. Firefox).
 
 Bugs
 ----
@@ -37,8 +37,10 @@ Bugs
 1. Use the source view break the widgets.
 
 When change to the source code editor the widget is lost and because of this
-when back to the WYSIWYG it just show the LaTeX version with some garbage of the
-MathML.
+when back to the WYSIWYG it just show MathML.
+
+If it strip the MathML you need to add `config.allowedContent = true;`. More
+information at http://docs.ckeditor.com/#!/api/CKEDITOR.config.
 
 2. Can't place text around the MathML element.
 
