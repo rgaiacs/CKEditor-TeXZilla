@@ -31,32 +31,24 @@ First
 Than open `ckeditor/plugins/texzilla/samples/index.html` with a web browser that
 support MathML (e.g. Firefox).
 
+Missing Features (Easy to implement)
+------------------------------------
+
+- Set icon properly
+- Set display attribute when insert MathML
+- Retrieve (La)TeX version from annotation
+- Retrieve (La)TeX version from alttext
+
+Missing Features (Hard to implement)
+------------------------------------
+
 Bugs
 ----
 
-1. Use the source view break the widgets.
+1. MathML tags being stripped:
+   http://ckeditor.com/forums/Support/unfilteredhtml-mode-of-editor.insertHtml-not-working
 
-When change to the source code editor the widget is lost and because of this
-when back to the WYSIWYG it just show MathML.
+2. Use the WYSIWYG editor remove equations insert in the source editor.
 
-If it strip the MathML you need to add `config.allowedContent = true;`. More
-information at http://docs.ckeditor.com/#!/api/CKEDITOR.config.
-
-2. Can't place text around the MathML element.
-
-CKEditor insert a `div` tag for the widget and some information in the first tag
-of the template:
-
-```
-<div class="cke_widget_wrapper cke_widget_block cke_widget_selected"
-contenteditable="false" tabindex="-1" data-cke-widget-wrapper="1"
-data-cke-filter="off" data-cke-display-name="p" data-cke-widget-id="0">
-  <p class="texzilla cke_widget_element" data-cke-widget-keep-attr="0"
-  data-widget="texzilla" data-cke-widget-data="{"tex":"\\sqrt{2}"}">
-    <math xmlns="http://www.w3.org/1998/Math/MathML"></math>
-  </p>
-  <span class="cke_reset cke_widget_drag_handler_container"
-  style="background:
-  url('file:///home/raniere/src/ck-texzilla/ckedit…or/plugins/widget/images/handle.png"></span>
-</div>
-```
+   You need to add `config.allowedContent = true;`. More
+   information at http://docs.ckeditor.com/#!/api/CKEDITOR.config.
