@@ -32,6 +32,26 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                             // TODO Look for <annotation encoding="TeX">
                             // TODO Look for <math alttext=""> as fallback
                         }
+                    },
+                    {
+                        id: 'display',
+                        type: 'checkbox',
+                        label: 'Display',
+                        setup: function(element) {
+                            var display = element.getAttribute("display");
+                            if (display === 'block') {
+                                this.setValue(true);
+                            }
+                            else {
+                                this.setValue(false);
+                            }
+                        }
+                    },
+                    {
+                        id: 'preview',
+                        type: 'html',
+                        label: 'Preview',
+                        html: '<div id="Preview"></div>'
                     }
                 ]
             },
@@ -40,12 +60,12 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                 label: 'Advanced Settings',
                 elements: [
                     {
-                        id: 'display',
+                        id: 'direction',
                         type: 'checkbox',
-                        label: 'Display',
+                        label: 'RTL',
                         setup: function(element) {
-                            var display = element.getAttribute("display");
-                            if (display === 'block') {
+                            var direction = element.getAttribute("dir");
+                            if (direction === 'rtl') {
                                 this.setValue(true);
                             }
                             else {
@@ -88,7 +108,7 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
 
           // This is a hack found at
           // http://stackoverflow.com/a/17339275/1802726.
-          var math = TeXZilla.toMathMLString(dialog.getValueOf('basic', 'tex'));
+          var math = TeXZilla.toMathMLString(dialog.getValueOf('basic', 'tex'), dialog.getValueOf('basic', 'display'));
           var mathElement = CKEDITOR.dom.element.createFromHtml(math, editor.document);
 
           editor.insertElement(mathElement);
