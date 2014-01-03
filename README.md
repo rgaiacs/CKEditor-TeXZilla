@@ -35,20 +35,9 @@ Missing Features (Easy to implement)
 ------------------------------------
 
 - Set icon properly
-- Set display attribute when insert MathML
-- Retrieve (La)TeX version from annotation
-- Retrieve (La)TeX version from alttext
 
 Missing Features (Hard to implement)
 ------------------------------------
 
 Bugs
 ----
-
-1. MathML tags being stripped:
-   http://ckeditor.com/forums/Support/unfilteredhtml-mode-of-editor.insertHtml-not-working
-
-2. Use the WYSIWYG editor remove equations insert in the source editor.
-
-   You need to add `config.allowedContent = true;`. More
-   information at http://docs.ckeditor.com/#!/api/CKEDITOR.config.
