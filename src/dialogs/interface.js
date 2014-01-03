@@ -78,9 +78,20 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
         onOk: function() {
           var dialog = this;
 
-          math = TeXZilla.toMathML(dialog.getValueOf('basic', 'tex'));
-          editor.insertHtml(math.outerHTML, 'unfiltered_html'); // Strip
-          // editor.insertElement(math);  // TypeError: element.getName is not a function
+          // This is the better way to insert the MathML, although we got
+          //
+          //     TypeError: element.getName is not a function
+          //
+          // when using it.
+          //
+          // var mathElement = TeXZilla.toMathML(dialog.getValueOf('basic', 'tex'));
+
+          // This is a hack found at
+          // http://stackoverflow.com/a/17339275/1802726.
+          var math = TeXZilla.toMathMLString(dialog.getValueOf('basic', 'tex'));
+          var mathElement = CKEDITOR.dom.element.createFromHtml(math, editor.document);
+
+          editor.insertElement(mathElement);
         }
     };
 } );
