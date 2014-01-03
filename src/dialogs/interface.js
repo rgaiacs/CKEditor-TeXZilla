@@ -29,8 +29,7 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                         type: 'textarea',
                         label: 'TeX code',
                         setup: function(element) {
-                            // TODO Look for <annotation encoding="TeX">
-                            // TODO Look for <math alttext=""> as fallback
+                            this.setValue(TeXZilla.getTeXSource(element.$));
                         }
                     },
                     {
@@ -88,6 +87,7 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                 this.insertMode = true;
             }
             else {
+                this.insertMode = false;
                 this.mathRoot = element;
             }
             if (!this.insertMode) {
@@ -111,6 +111,10 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
           var math = TeXZilla.toMathMLString(dialog.getValueOf('basic', 'tex'), dialog.getValueOf('basic', 'display'));
           var mathElement = CKEDITOR.dom.element.createFromHtml(math, editor.document);
 
+          if(!this.insertMode) {
+              // Remove old equation
+              this.mathRoot.$.parentNode.removeChild(this.mathRoot.$);
+          }
           editor.insertElement(mathElement);
         }
     };
