@@ -20,14 +20,7 @@ CKEDITOR.plugins.add( 'texzilla', {
     init: function( editor ) {
         CKEDITOR.dialog.add('texzillaDialog', this.path + 'dialogs/texzilla.js');
 
-        editor.addCommand('texzillaDialog', new CKEDITOR.dialogCommand('texzillaDialog', {
-          // Advanced Content Filter
-          // More information about the string format in
-          // http://docs.ckeditor.com/#!/guide/dev_allowed_content_rules-section-2
-          // TODO Add more tags
-          allowedContent: 'math[xmlns] semantics mn mo msqrt annotation[encoding]',
-          requiredContent: 'math mn mo msqrt'
-        }));
+        editor.addCommand('texzillaDialog', new CKEDITOR.dialogCommand('texzillaDialog'));
         editor.ui.addButton('texzilla', {
             label: 'Insert MathML based on (La)TeX',
             command: 'texzillaDialog',
