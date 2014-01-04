@@ -108,7 +108,10 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
 
           // This is a hack found at
           // http://stackoverflow.com/a/17339275/1802726.
-          var math = TeXZilla.toMathMLString(dialog.getValueOf('basic', 'tex'), dialog.getValueOf('basic', 'display'));
+          var math = TeXZilla.toMathMLString(
+                  dialog.getValueOf('basic', 'tex'),
+                  dialog.getValueOf('basic', 'display'),
+                  dialog.getValueOf('advanced', 'direction'));
           var mathElement = CKEDITOR.dom.element.createFromHtml(math, editor.document);
 
           if(!this.insertMode) {
