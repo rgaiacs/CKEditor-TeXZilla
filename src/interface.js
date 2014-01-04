@@ -28,7 +28,7 @@ CKEDITOR.plugins.add( 'texzilla', {
           allowedContent: 'math[xmlns] semantics mn mo msqrt annotation[encoding]',
           requiredContent: 'math mn mo msqrt'
         }));
-        editor.ui.addButton('Insert MathML', {
+        editor.ui.addButton('texzilla', {
             label: 'Insert MathML based on (La)TeX',
             command: 'texzillaDialog',
             toolbar: 'insert'

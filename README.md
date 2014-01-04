@@ -34,8 +34,6 @@ support MathML (e.g. Firefox).
 Missing Features (Easy to implement)
 ------------------------------------
 
-- Set icon properly
-
 Missing Features (Hard to implement)
 ------------------------------------
 
