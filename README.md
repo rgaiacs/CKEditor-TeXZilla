@@ -10,8 +10,8 @@ Dependencies
 
 All dependencies of TeXZilla must be satisfied.
 
-Building
---------
+Build
+-----
 
 First you have to download CKEditor and TeXZilla:
 
@@ -21,15 +21,21 @@ After that just
 
   $ make build
 
-See sample
-----------
+Install
+-------
 
-First
+Just
 
   $ make deploy
 
-Than open `ckeditor/plugins/texzilla/samples/index.html` with a web browser that
+To see the plugin in action,
+open `ckeditor/plugins/texzilla/samples/index.html` with a web browser that
 support MathML (e.g. Firefox).
+
+TODO
+----
+
+- Test the plugin with [Kuma](https://github.com/mozilla/kuma)
 
 Missing Features (Easy to implement)
 ------------------------------------
@@ -39,3 +45,5 @@ Missing Features (Hard to implement)
 
 Bugs
 ----
+
+- The direction option is ignored in the preview.
