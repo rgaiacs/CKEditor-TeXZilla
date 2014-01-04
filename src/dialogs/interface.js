@@ -18,7 +18,7 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
     return {
         title: 'TeXZilla Edit Box',
         minWidth: 300,
-        minHeight: 200,
+        minHeight: 300,
         contents: [
             {
                 id: 'basic',
@@ -27,9 +27,19 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                     {
                         id: 'tex',
                         type: 'textarea',
-                        label: 'TeX code',
+                        label: '(La)TeX code (Click outside the textarea to update the preview)',
                         setup: function(element) {
                             this.setValue(TeXZilla.getTeXSource(element.$));
+                        },
+                        onChange: function() {
+                            var preview = document.getElementById('Preview');
+                            // Clean previous preview
+                            var previous = preview.childNodes;
+                            for(i = 0; i < previous.length; i++) {
+                                preview.removeChild(previous[i]);
+                            }
+                            var mathElement = TeXZilla.toMathML(this.getValue());
+                            preview.appendChild(mathElement);
                         }
                     },
                     {
@@ -50,7 +60,16 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                         id: 'preview',
                         type: 'html',
                         label: 'Preview',
-                        html: '<div id="Preview"></div>'
+                        html: '<div><p>Preview:</p><div id="Preview"></div>',
+                        setup: function(element) {
+                            var preview = document.getElementById('Preview');
+                            // Clean previous preview
+                            var previous = preview.childNodes;
+                            for(i = 0; i < previous.length; i++) {
+                                preview.removeChild(previous[i]);
+                            }
+                            preview.appendChild(element.$.cloneNode(true));
+                        }
                     }
                 ]
             },
