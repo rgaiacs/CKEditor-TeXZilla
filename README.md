@@ -32,6 +32,16 @@ To see the plugin in action,
 open `ckeditor/plugins/texzilla/samples/index.html` with a web browser that
 support MathML (e.g. Firefox).
 
+Contributing
+------------
+
+For any question or bug report you can use [GitHub
+Issue](https://github.com/r-gaia-cs/CKEditor-TeXZilla/issues).
+
+And you can use [GitHub Pull
+Request](https://github.com/r-gaia-cs/CKEditor-TeXZilla/pulls) to send the code
+that you write.
+
 TODO
 ----
 
