@@ -39,6 +39,23 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                                 preview.removeChild(previous[i]);
                             }
                             var mathElement = TeXZilla.toMathML(this.getValue());
+
+                            // Check for error
+                            var has_error = false;
+                            for (var i = 0; i < mathElement.lastElementChild.childElementCount; i++) {
+                                if (mathElement.lastElementChild.children[i].localName === 'merror') {
+                                    has_error = true;
+                                }
+                            }
+
+                            var dialog = CKEDITOR.dialog.getCurrent();
+                            // Disable button if errer
+                            if (has_error === true) {
+                                dialog.disableButton("ok");
+                            }
+                            else {
+                                dialog.enableButton("ok");
+                            }
                             preview.appendChild(mathElement);
                         }
                     },
