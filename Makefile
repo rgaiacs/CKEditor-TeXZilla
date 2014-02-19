@@ -45,7 +45,7 @@ src/parse.js:
 	$(MAKE) -C texzilla build
 
 # Join the TeXZilla with the CKEditor plugin interface
-src/plugin.js: texzilla/TeXZilla.js src/interface.js
+src/plugin.js: src/interface.js
 	cat $^ > $@
 
 src/dialogs/texzilla.js: texzilla/TeXZilla.js src/dialogs/interface.js
