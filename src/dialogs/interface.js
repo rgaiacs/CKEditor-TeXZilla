@@ -92,7 +92,8 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                         id: 'preview',
                         type: 'html',
                         label: 'Preview',
-                        html: '<div><p>Preview:</p><div id="Preview"></div>',
+                        // Width of the preview box is based on the minWidth of the dialog window.
+                        html: '<div><p>Preview:</p><div id="Preview" style=\'width:250px; overflow:auto;\'></div>',
                         setup: function(insertMode, element) {
                             var preview = document.getElementById('Preview');
                             // Clean previous preview
