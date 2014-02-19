@@ -28,8 +28,9 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                         id: 'tex',
                         type: 'textarea',
                         label: '(La)TeX code (Click outside the textarea to update the preview)',
-                        setup: function(element) {
-                            this.setValue(TeXZilla.getTeXSource(element.$));
+                        setup: function(insertMode, element) {
+                            if (!insertMode)
+                                this.setValue(TeXZilla.getTeXSource(element.$));
                         },
                         onChange: function() {
                             var preview = document.getElementById('Preview');
@@ -63,7 +64,7 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                         id: 'display',
                         type: 'checkbox',
                         label: 'Display',
-                        setup: function(element) {
+                        setup: function(insertMode, element) {
                             var display = element.getAttribute("display");
                             if (display === 'block') {
                                 this.setValue(true);
@@ -77,7 +78,7 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                         id: 'direction',
                         type: 'checkbox',
                         label: 'RTL',
-                        setup: function(element) {
+                        setup: function(insertMode, element) {
                             var direction = element.getAttribute("dir");
                             if (direction === 'rtl') {
                                 this.setValue(true);
@@ -92,14 +93,15 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                         type: 'html',
                         label: 'Preview',
                         html: '<div><p>Preview:</p><div id="Preview"></div>',
-                        setup: function(element) {
+                        setup: function(insertMode, element) {
                             var preview = document.getElementById('Preview');
                             // Clean previous preview
                             var previous = preview.childNodes;
                             for(i = 0; i < previous.length; i++) {
                                 preview.removeChild(previous[i]);
                             }
-                            preview.appendChild(element.$.cloneNode(true));
+                            if (!insertMode)
+                                preview.appendChild(element.$.cloneNode(true));
                         }
                     }
                 ]
@@ -120,10 +122,8 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                 this.insertMode = false;
                 this.mathRoot = element;
             }
-            if (!this.insertMode) {
-                // invoke the setup functions for the element
-                this.setupContent( element );
-            }
+            // invoke the setup functions for the element
+            this.setupContent( this.insertMode, element );
         },
         onOk: function() {
           var dialog = this;
