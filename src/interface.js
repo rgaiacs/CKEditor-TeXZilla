@@ -24,6 +24,7 @@ CKEDITOR.plugins.add( 'texzilla', {
         editor.ui.addButton('texzilla', {
             label: 'Insert MathML based on (La)TeX',
             command: 'texzillaDialog',
+            icon: this.path + 'icons/texzilla.png',
             toolbar: 'insert'
         });
     }
