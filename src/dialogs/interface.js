@@ -57,6 +57,20 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                         }
                     },
                     {
+                        id: 'direction',
+                        type: 'checkbox',
+                        label: 'RTL',
+                        setup: function(element) {
+                            var direction = element.getAttribute("dir");
+                            if (direction === 'rtl') {
+                                this.setValue(true);
+                            }
+                            else {
+                                this.setValue(false);
+                            }
+                        }
+                    },
+                    {
                         id: 'preview',
                         type: 'html',
                         label: 'Preview',
@@ -69,26 +83,6 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                                 preview.removeChild(previous[i]);
                             }
                             preview.appendChild(element.$.cloneNode(true));
-                        }
-                    }
-                ]
-            },
-            {
-                id: 'advanced',
-                label: 'Advanced Settings',
-                elements: [
-                    {
-                        id: 'direction',
-                        type: 'checkbox',
-                        label: 'RTL',
-                        setup: function(element) {
-                            var direction = element.getAttribute("dir");
-                            if (direction === 'rtl') {
-                                this.setValue(true);
-                            }
-                            else {
-                                this.setValue(false);
-                            }
                         }
                     }
                 ]
@@ -130,7 +124,7 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
           var math = TeXZilla.toMathMLString(
                   dialog.getValueOf('basic', 'tex'),
                   dialog.getValueOf('basic', 'display'),
-                  dialog.getValueOf('advanced', 'direction'));
+                  dialog.getValueOf('basic', 'direction'));
           var mathElement = CKEDITOR.dom.element.createFromHtml(math, editor.document);
 
           if(!this.insertMode) {
