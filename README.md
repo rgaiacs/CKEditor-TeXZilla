@@ -41,19 +41,3 @@ Issue](https://github.com/r-gaia-cs/CKEditor-TeXZilla/issues).
 And you can use [GitHub Pull
 Request](https://github.com/r-gaia-cs/CKEditor-TeXZilla/pulls) to send the code
 that you write.
-
-TODO
-----
-
-- Test the plugin with [Kuma](https://github.com/mozilla/kuma)
-
-Missing Features (Easy to implement)
-------------------------------------
-
-Missing Features (Hard to implement)
-------------------------------------
-
-Bugs
-----
-
-- The direction option is ignored in the preview.
