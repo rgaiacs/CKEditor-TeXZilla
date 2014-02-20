@@ -60,7 +60,7 @@ CKEDITOR.dialog.add('texzillaDialog', function(editor) {
             elements: [{
                 id: 'tex',
                 type: 'textarea',
-                label: '(La)TeX code (Click outside the textarea to update the preview)',
+                label: 'Please insert your (LaTex) code:',
                 setup: function(insertMode, element) {
                     if (!insertMode) {
                         this.setValue(TeXZilla.getTeXSource(element.$));
@@ -69,6 +69,10 @@ CKEDITOR.dialog.add('texzillaDialog', function(editor) {
                 onChange: function() {
                     update_preview();
                 }
+            }, {
+                id: 'instruction',
+                type: 'html',
+                html: '<div>(Clicking outside of the textarea updates the preview)</div>'
             }, {
                 id: 'display',
                 type: 'checkbox',
