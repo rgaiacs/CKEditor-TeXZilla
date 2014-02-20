@@ -16,10 +16,15 @@
 
 CKEDITORPATH?=ckeditor
 PLUGINPATH=/plugins/texzilla
+SRCFILES=src/interface.js \
+	 src/dialogs/interface.js
 
 help:
 	@echo 'make help'
 	@echo '  Print this text.'
+	@echo ''
+	@echo 'make check'
+	@echo '  Run JS Beautifier and JSHint.'
 	@echo ''
 	@echo 'make build'
 	@echo '  Build the plugin.'
@@ -36,6 +41,15 @@ help:
 	@echo 'make link CKEDITORPATH=/path/to/ckeditor'
 	@echo '  Link `src` to `/path/to/ckeditor/plugins/texzilla`'
 
+# Run JS Beautifier
+beautifier: ${SRCFILES}
+	js-beautify -r --config .js-beautifyrc ${SRCFILES}
+
+lint: ${SRCFILES}
+	jshint ${SRCFILES}
+
+check: beautifier lint
+
 # Build the icon from svg
 src/icons/texzilla.png: src/icons/texzilla.svg
 	convert -background none -density 512x512 $< -resize 16x16 $@
@@ -47,6 +61,9 @@ src/parse.js:
 # Join the TeXZilla with the CKEditor plugin interface
 src/plugin.js: src/interface.js
 	cat $^ > $@
+
+texzilla/TeXZilla.js:
+	make -C texzilla build
 
 src/dialogs/texzilla.js: texzilla/TeXZilla.js src/dialogs/interface.js
 	cat $^ > $@
@@ -65,7 +82,9 @@ link: build
 	fi
 
 clean:
-	rm -rf $(CKEDITORPATH)$(PLUGINPATH)
+	rm -f src/plugin.js \
+	    src/dialogs/texzilla.js
 
 cleanall: clean
 	rm -f src/icons/texzilla.png
+	rm -rf $(CKEDITORPATH)$(PLUGINPATH)

@@ -1,4 +1,4 @@
-﻿// CKEditor TeXZilla Plugin
+// CKEditor TeXZilla Plugin
 // Copyright (C) 2014  Raniere Silva
 //
 // This program is free software: you can redistribute it and/or modify
@@ -14,10 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-CKEDITOR.plugins.add( 'texzilla', {
+/* global CKEDITOR: false */
+
+CKEDITOR.plugins.add('texzilla', {
     icons: 'texzilla',
 
-    init: function( editor ) {
+    init: function(editor) {
         CKEDITOR.dialog.add('texzillaDialog', this.path + 'dialogs/texzilla.js');
 
         editor.addCommand('texzillaDialog', new CKEDITOR.dialogCommand('texzillaDialog'));
