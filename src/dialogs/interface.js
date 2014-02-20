@@ -14,6 +14,38 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+function update_preview() {
+    var dialog = CKEDITOR.dialog.getCurrent();
+
+    var preview = document.getElementById('Preview');
+    // Clean previous preview
+    var previous = preview.childNodes;
+    for(i = 0; i < previous.length; i++) {
+        preview.removeChild(previous[i]);
+    }
+    var mathElement = TeXZilla.toMathML(
+            dialog.getValueOf('basic', 'tex'),
+            dialog.getValueOf('basic', 'display'),
+            dialog.getValueOf('basic', 'direction'));
+
+    // Check for error
+    var has_error = false;
+    for (var i = 0; i < mathElement.lastElementChild.childElementCount; i++) {
+        if (mathElement.lastElementChild.children[i].localName === 'merror') {
+            has_error = true;
+        }
+    }
+
+    // Disable button if errer
+    if (has_error === true) {
+        dialog.disableButton("ok");
+    }
+    else {
+        dialog.enableButton("ok");
+    }
+    preview.appendChild(mathElement);
+}
+
 CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
     return {
         title: 'TeXZilla Edit Box',
@@ -33,31 +65,7 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                                 this.setValue(TeXZilla.getTeXSource(element.$));
                         },
                         onChange: function() {
-                            var preview = document.getElementById('Preview');
-                            // Clean previous preview
-                            var previous = preview.childNodes;
-                            for(i = 0; i < previous.length; i++) {
-                                preview.removeChild(previous[i]);
-                            }
-                            var mathElement = TeXZilla.toMathML(this.getValue());
-
-                            // Check for error
-                            var has_error = false;
-                            for (var i = 0; i < mathElement.lastElementChild.childElementCount; i++) {
-                                if (mathElement.lastElementChild.children[i].localName === 'merror') {
-                                    has_error = true;
-                                }
-                            }
-
-                            var dialog = CKEDITOR.dialog.getCurrent();
-                            // Disable button if errer
-                            if (has_error === true) {
-                                dialog.disableButton("ok");
-                            }
-                            else {
-                                dialog.enableButton("ok");
-                            }
-                            preview.appendChild(mathElement);
+                            update_preview()
                         }
                     },
                     {
@@ -72,6 +80,9 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                             else {
                                 this.setValue(false);
                             }
+                        },
+                        onChange: function() {
+                            update_preview()
                         }
                     },
                     {
@@ -86,6 +97,9 @@ CKEDITOR.dialog.add('texzillaDialog', function( editor ) {
                             else {
                                 this.setValue(false);
                             }
+                        },
+                        onChange: function() {
+                            update_preview()
                         }
                     },
                     {
