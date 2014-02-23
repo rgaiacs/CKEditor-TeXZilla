@@ -71,8 +71,8 @@ src/dialogs/texzilla.js: texzilla/TeXZilla.js src/dialogs/interface.js
 build: src/icons/texzilla.png src/plugin.js src/dialogs/texzilla.js
 
 deploy: build
-	mkdir -p $(CKEDITORPATH)$(PLUGINPATH)
-	if test -d $(CKEDITORPATH)$(PLUGINPATH); then \
+	if test ! -h $(CKEDITORPATH)$(PLUGINPATH); then \
+	    mkdir -p $(CKEDITORPATH)$(PLUGINPATH); \
 	    cp -r src/* $(CKEDITORPATH)$(PLUGINPATH); \
 	fi
 
