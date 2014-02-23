@@ -65,6 +65,10 @@ CKEDITOR.dialog.add('texzillaDialog', function(editor) {
                 type: 'html',
                 html: '<div>(Clicking outside of the textarea updates the preview)</div>'
             }, {
+                id: 'options',
+                type: 'html',
+                html: '<div><strong>Options:</strong></div>'
+            }, {
                 id: 'display',
                 type: 'checkbox',
                 label: 'Display',
@@ -101,7 +105,7 @@ CKEDITOR.dialog.add('texzillaDialog', function(editor) {
                 type: 'html',
                 label: 'Preview',
                 // Width of the preview box is based on the minWidth of the dialog window.
-                html: '<div><p>Preview:</p><div id="Preview" style=\'width:250px; overflow:auto;\'></div>',
+                html: '<div><p><strong>Preview</strong>:</p><div id="Preview" style=\'width:250px; overflow:auto;\'></div>',
                 setup: function(insertMode, element) {
                     var preview = document.getElementById('Preview');
                     // Clean previous preview
