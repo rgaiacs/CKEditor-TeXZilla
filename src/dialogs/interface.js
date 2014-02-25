@@ -11,7 +11,7 @@
 function update_preview() {
     var dialog = CKEDITOR.dialog.getCurrent();
 
-    var preview = document.getElementById('Preview');
+    var preview = document.getElementById("Preview");
     // Clean previous preview
     var previous = preview.childNodes;
     for (var i = 0; i < previous.length; i++) {
@@ -19,9 +19,9 @@ function update_preview() {
     }
     var has_error;
     var mathElement = TeXZilla.toMathML(
-        dialog.getValueOf('basic', 'tex'),
-        dialog.getValueOf('basic', 'display'),
-        dialog.getValueOf('basic', 'direction'),
+        dialog.getValueOf("basic", "tex"),
+        dialog.getValueOf("basic", "display"),
+        dialog.getValueOf("basic", "direction"),
         has_error);
 
     // Disable button if errer
@@ -34,18 +34,18 @@ function update_preview() {
     preview.appendChild(mathElement);
 }
 
-CKEDITOR.dialog.add('texzillaDialog', function(editor) {
+CKEDITOR.dialog.add("texzillaDialog", function(editor) {
     return {
-        title: 'TeXZilla Edit Box',
+        title: "TeXZilla Edit Box",
         minWidth: 300,
         minHeight: 300,
         contents: [{
-            id: 'basic',
-            label: 'Basic Settings',
+            id: "basic",
+            label: "Basic Settings",
             elements: [{
-                id: 'tex',
-                type: 'textarea',
-                label: 'Please insert your (LaTex) code:',
+                id: "tex",
+                type: "textarea",
+                label: "Please insert your (LaTex) code:",
                 setup: function(insertMode, element) {
                     if (!insertMode) {
                         this.setValue(TeXZilla.getTeXSource(element.$));
@@ -55,20 +55,20 @@ CKEDITOR.dialog.add('texzillaDialog', function(editor) {
                     update_preview();
                 }
             }, {
-                id: 'instruction',
-                type: 'html',
-                html: '<div>(Clicking outside of the textarea updates the preview)</div>'
+                id: "instruction",
+                type: "html",
+                html: "<div>(Clicking outside of the textarea updates the preview)</div>"
             }, {
-                id: 'options',
-                type: 'html',
-                html: '<div><strong>Options:</strong></div>'
+                id: "options",
+                type: "html",
+                html: "<div><strong>Options:</strong></div>"
             }, {
-                id: 'display',
-                type: 'checkbox',
-                label: 'Display',
+                id: "display",
+                type: "checkbox",
+                label: "Display",
                 setup: function(insertMode, element) {
                     var display = element.getAttribute("display");
-                    if (display === 'block') {
+                    if (display === "block") {
                         this.setValue(true);
                     }
                     else {
@@ -79,12 +79,12 @@ CKEDITOR.dialog.add('texzillaDialog', function(editor) {
                     update_preview();
                 }
             }, {
-                id: 'direction',
-                type: 'checkbox',
-                label: 'RTL',
+                id: "direction",
+                type: "checkbox",
+                label: "RTL",
                 setup: function(insertMode, element) {
                     var direction = element.getAttribute("dir");
-                    if (direction === 'rtl') {
+                    if (direction === "rtl") {
                         this.setValue(true);
                     }
                     else {
@@ -95,13 +95,13 @@ CKEDITOR.dialog.add('texzillaDialog', function(editor) {
                     update_preview();
                 }
             }, {
-                id: 'preview',
-                type: 'html',
-                label: 'Preview',
+                id: "preview",
+                type: "html",
+                label: "Preview",
                 // Width of the preview box is based on the minWidth of the dialog window.
-                html: '<div><p><strong>Preview</strong>:</p><div id="Preview" style=\'width:250px; overflow:auto;\'></div>',
+                html: "<div><p><strong>Preview</strong>:</p><div id=\"Preview\" style=\"width:250px; overflow:auto;\"></div>",
                 setup: function(insertMode, element) {
-                    var preview = document.getElementById('Preview');
+                    var preview = document.getElementById("Preview");
                     // Clean previous preview
                     var previous = preview.childNodes;
                     for (var i = 0; i < previous.length; i++) {
@@ -117,11 +117,11 @@ CKEDITOR.dialog.add('texzillaDialog', function(editor) {
             var selection = editor.getSelection();
             var element = selection.getStartElement();
             // Try to locate a `math` or `body` tag.
-            while (element.getName() !== 'math' &&
-                element.getName() !== 'body') {
+            while (element.getName() !== "math" &&
+                element.getName() !== "body") {
                 element = element.getParent();
             }
-            if (!element || element.getName() !== 'math') {
+            if (!element || element.getName() !== "math") {
                 this.insertMode = true;
             }
             else {
@@ -140,15 +140,17 @@ CKEDITOR.dialog.add('texzillaDialog', function(editor) {
             //
             // when using it.
             //
-            // var mathElement = TeXZilla.toMathML(dialog.getValueOf('basic', 'tex'));
+            // var mathElement = TeXZilla.toMathML(
+            //     dialog.getValueOf("basic", "tex"));
 
             // This is a hack found at
             // http://stackoverflow.com/a/17339275/1802726.
             var math = TeXZilla.toMathMLString(
-                dialog.getValueOf('basic', 'tex'),
-                dialog.getValueOf('basic', 'display'),
-                dialog.getValueOf('basic', 'direction'));
-            var mathElement = CKEDITOR.dom.element.createFromHtml(math, editor.document);
+                dialog.getValueOf("basic", "tex"),
+                dialog.getValueOf("basic", "display"),
+                dialog.getValueOf("basic", "direction"));
+            var mathElement = CKEDITOR.dom.element.createFromHtml(math,
+                editor.document);
 
             if (!this.insertMode) {
                 // Remove old equation
