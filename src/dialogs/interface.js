@@ -17,20 +17,23 @@ function update_preview() {
     for (var i = 0; i < previous.length; i++) {
         preview.removeChild(previous[i]);
     }
-    var has_error;
-    var mathElement = TeXZilla.toMathML(
-        dialog.getValueOf("basic", "tex"),
-        dialog.getValueOf("basic", "display"),
-        dialog.getValueOf("basic", "direction"),
-        has_error);
 
-    // Disable button if errer
-    if (has_error === true) {
-        dialog.disableButton("ok");
-    }
-    else {
+    var mathElement;
+    try {
+        mathElement = TeXZilla.toMathML(
+            dialog.getValueOf("basic", "tex"),
+            dialog.getValueOf("basic", "display"),
+            dialog.getValueOf("basic", "direction"),
+            true);
         dialog.enableButton("ok");
     }
+    catch (error) {
+        // Disable button if errer
+        mathElement = document.createElement("p");
+        mathElement.innerHTML = "Error. Please check your (LaTeX) code.";
+        dialog.disableButton("ok");
+    }
+
     preview.appendChild(mathElement);
 }
 
@@ -148,7 +151,8 @@ CKEDITOR.dialog.add("texzillaDialog", function(editor) {
             var math = TeXZilla.toMathMLString(
                 dialog.getValueOf("basic", "tex"),
                 dialog.getValueOf("basic", "display"),
-                dialog.getValueOf("basic", "direction"));
+                dialog.getValueOf("basic", "direction"),
+                true);
             var mathElement = CKEDITOR.dom.element.createFromHtml(math,
                 editor.document);
 
