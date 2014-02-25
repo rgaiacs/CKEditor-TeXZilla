@@ -14,7 +14,7 @@ function update_preview() {
     var preview = document.getElementById('Preview');
     // Clean previous preview
     var previous = preview.childNodes;
-    for (i = 0; i < previous.length; i++) {
+    for (var i = 0; i < previous.length; i++) {
         preview.removeChild(previous[i]);
     }
     var has_error;
