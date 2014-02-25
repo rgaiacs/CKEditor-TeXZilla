@@ -9,6 +9,15 @@ CKEDITORPATH?=ckeditor
 PLUGINPATH=/plugins/texzilla
 SRCFILES=src/interface.js \
 	 src/dialogs/interface.js
+PLUGINFILES= src/icons/texzilla.png  \
+	     src/plugin.js \
+	     src/dialogs/texzilla.js
+RELEASEFILES= AUTHORS \
+	      COPYING \
+	      README.md \
+	      THANKS \
+	      ${PLUGINFILES} \
+	      src/samples/index.html
 
 help:
 	@echo 'make help'
@@ -71,6 +80,9 @@ link: build
 	if test ! -e $(CKEDITORPATH)$(PLUGINPATH); then \
 	    ln -s $(PWD)/src $(CKEDITORPATH)$(PLUGINPATH); \
 	fi
+
+release: build
+	zip ckeditor-texzilla.zip ${RELEASEFILES}
 
 clean:
 	rm -f src/plugin.js \
