@@ -17,18 +17,12 @@ function update_preview() {
     for (i = 0; i < previous.length; i++) {
         preview.removeChild(previous[i]);
     }
+    var has_error;
     var mathElement = TeXZilla.toMathML(
         dialog.getValueOf('basic', 'tex'),
         dialog.getValueOf('basic', 'display'),
-        dialog.getValueOf('basic', 'direction'));
-
-    // Check for error
-    var has_error = false;
-    for (var i = 0; i < mathElement.lastElementChild.childElementCount; i++) {
-        if (mathElement.lastElementChild.children[i].localName === 'merror') {
-            has_error = true;
-        }
-    }
+        dialog.getValueOf('basic', 'direction'),
+        has_error);
 
     // Disable button if errer
     if (has_error === true) {
