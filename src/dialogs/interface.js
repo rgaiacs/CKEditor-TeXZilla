@@ -30,7 +30,8 @@ function update_preview() {
     catch (error) {
         // Disable button if errer
         mathElement = document.createElement("p");
-        mathElement.innerHTML = "Error. Please check your (LaTeX) code.";
+        mathElement.setAttribute("style", "color:red;");
+        mathElement.innerHTML = dialog.getValueOf("basic", "tex");
         dialog.disableButton("ok");
     }
 
@@ -53,6 +54,9 @@ CKEDITOR.dialog.add("texzillaDialog", function(editor) {
                     if (!insertMode) {
                         this.setValue(TeXZilla.getTeXSource(element.$));
                     }
+                },
+                onKeyup: function() {
+                    update_preview();
                 },
                 onChange: function() {
                     update_preview();
