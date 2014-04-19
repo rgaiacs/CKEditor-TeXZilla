@@ -55,7 +55,7 @@ CKEDITOR.dialog.add("texzillaDialog", function(editor) {
                         this.setValue(TeXZilla.getTeXSource(element.$));
                     }
                 },
-                onKeyup: function() {
+                onInput: function() {
                     update_preview();
                 },
                 onChange: function() {
