@@ -75,6 +75,7 @@ link: build
 	    ln -s $(PWD)/src $(CKEDITORPATH)$(PLUGINPATH); \
 	fi
 
+## release         : create a zip to distribute
 release: build
 	zip ckeditor-texzilla.zip ${RELEASEFILES}
 
