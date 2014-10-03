@@ -53,7 +53,7 @@ src/plugin.js: src/interface.js
 	cat $^ > $@
 
 ${TeXZilla}:
-	wget https://raw.githubusercontent.com/fred-wang/TeXZilla/TeXZilla-0.9.7/TeXZilla.js \
+	wget https://raw.githubusercontent.com/fred-wang/TeXZilla/TeXZilla-0.9.8/TeXZilla.js \
 	    -O ${TeXZilla}
 
 src/dialogs/texzilla.js: ${TeXZilla} src/dialogs/interface.js
